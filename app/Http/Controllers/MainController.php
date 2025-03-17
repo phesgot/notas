@@ -14,10 +14,10 @@ class MainController extends Controller
         // load user's notes
         $id = session('user.id');
         $notes = User::find($id)
-                        ->notes()
-                        ->whereNull('deleted_at')
-                        ->get()
-                        ->toArray();
+            ->notes()
+            ->whereNull('deleted_at')
+            ->get()
+            ->toArray();
 
         // show home view
         return view('home', ['notes' => $notes]);
@@ -34,7 +34,7 @@ class MainController extends Controller
         $request->validate(
             //rules
             [
-                'text_title' => 'required|min:3|max:200', 
+                'text_title' => 'required|min:3|max:200',
                 'text_note' => 'required|min:3|max:3000',
             ],
             // error messages
@@ -46,7 +46,7 @@ class MainController extends Controller
                 'text_note.min' => 'A nota deve ter pelo menos :min caracteres',
                 'text_note.max' => 'A nota deve ter pelo menos :max caracteres'
             ]
-        ); 
+        );
 
         // get user id 
         $id = session('user.id');
@@ -65,7 +65,11 @@ class MainController extends Controller
     public function editNote($id)
     {
         $id = Operations::decryptId($id);
-        
+
+        if ($id === null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
@@ -79,7 +83,7 @@ class MainController extends Controller
         $request->validate(
             //rules
             [
-                'text_title' => 'required|min:3|max:200', 
+                'text_title' => 'required|min:3|max:200',
                 'text_note' => 'required|min:3|max:3000',
             ],
             // error messages
@@ -91,15 +95,19 @@ class MainController extends Controller
                 'text_note.min' => 'A nota deve ter pelo menos :min caracteres',
                 'text_note.max' => 'A nota deve ter pelo menos :max caracteres'
             ]
-        ); 
+        );
 
         // check if note_id exists
-        if($request->note_id == null){
+        if ($request->note_id == null) {
             return redirect()->route('home');
         }
 
         // decrypt note_id
         $id = Operations::decryptId($request->note_id);
+
+        if ($id === null) {
+            return redirect()->route('home');
+        }
 
         // load note
         $note = Note::find($id);
@@ -107,7 +115,7 @@ class MainController extends Controller
         // update note
         $note->title = $request->text_title;
         $note->text = $request->text_note;
-        $note->save(); 
+        $note->save();
 
         // redirect to home
         return redirect()->route('home');
@@ -117,7 +125,11 @@ class MainController extends Controller
     {
         // check if $id is encrypted
         $id = Operations::decryptId($id);
-        
+
+        if ($id === null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
@@ -129,7 +141,11 @@ class MainController extends Controller
     {
         // check if $id is encrypted
         $id = Operations::decryptId($id);
-        
+
+        if ($id === null) {
+            return redirect()->route('home');
+        }
+
         // load note
         $note = Note::find($id);
 
@@ -148,6 +164,5 @@ class MainController extends Controller
 
         // redirect to home
         return redirect()->route('home');
-
     }
 }
