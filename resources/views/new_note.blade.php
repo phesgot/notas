@@ -9,43 +9,45 @@
                 <!-- label and cancel -->
                 <div class="row">
                     <div class="col">
-                        <p class="display-6 mb-0">NEW NOTE</p>
+                        <p class="display-6 mb-0">NOVA NOTA</p>
                     </div>
                     <div class="col text-end">
-                        <a href="{{route('home')}}" class="btn btn-outline-danger">
+                        <a href="{{ route('home') }}" class="btn btn-outline-danger">
                             <i class="fa-solid fa-xmark"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- form -->
-                <form action="{{route('newNoteSubmit')}}" method="post">
+                <form action="{{ route('newNoteSubmit') }}" method="post">
                     @csrf
                     <div class="row mt-3">
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label">Note Title</label>
-                                <input type="text" class="form-control bg-primary text-white" name="text_title" value="{{ old('text_title')}}">
+                                <label class="form-label">Título da nota</label>
+                                <input type="text" class="form-control bg-primary text-white" name="text_title"
+                                    value="{{ old('text_title') }}">
                                 {{-- show error --}}
                                 @error('text_title')
-                                    <div class="text-danger">{{$message}}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Note Text</label>
-                                <textarea class="form-control bg-primary text-white" name="text_note" rows="5">{{ old('text_note')}}</textarea>
+                                <label class="form-label">Texto da nota</label>
+                                <textarea class="form-control bg-primary text-white" name="text_note" rows="5">{{ old('text_note') }}</textarea>
                                 {{-- show error --}}
                                 @error('text_note')
-                                    <div class="text-danger">{{$message}}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col text-end">
-                            <a href="{{route('home')}}" class="btn btn-primary px-5"><i class="fa-solid fa-ban me-2"></i>Cancel</a>
+                            <a href="{{ route('home') }}" class="btn btn-primary px-5"><i
+                                    class="fa-solid fa-ban me-2"></i>Cancelar</a>
                             <button type="submit" class="btn btn-secondary px-5"><i
-                                    class="fa-regular fa-circle-check me-2"></i>Save</button>
+                                    class="fa-regular fa-circle-check me-2"></i>Salvar</button>
                         </div>
                     </div>
                 </form>
