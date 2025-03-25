@@ -1,6 +1,6 @@
 # 🚀 Sistema básico de Notas
 
-![Laravel](https://img.shields.io/badge/Laravel-10.x-red?style=flat&logo=laravel)  
+![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=flat&logo=laravel)  
 > Um simples projeto em laravel que cria notas e armazena em uma base de dados. 
 
 ## 🎥 Demonstração
