@@ -3,5 +3,4 @@
 # Sistema básico de Notas
 
 # Preview GIF animado
-
-
+![Image](https://github.com/user-attachments/assets/a4eaac39-f451-4bda-9417-3290a2a6a4c1)
